@@ -3,7 +3,7 @@
 
 #include "Random.h"
 
-const int RANDOM_PARAMETER = 100;
+//const int RANDOM_PARAMETER = 100;
 
 struct Customer{
   int arrive_time;

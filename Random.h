@@ -1,5 +1,8 @@
-#ifndef _RANFOM_HPP_
-#define _RANDOM_HPP_
+#pragma once
+
+#ifndef _RANFOM_H_
+#define _RANDOM_H_
+
 #include <cstdlib>
 #include <cmath>
 
@@ -9,6 +12,5 @@ public:
     return ((double)std::rand()/(RAND_MAX))*max;
   }
 };
-
 
 #endif

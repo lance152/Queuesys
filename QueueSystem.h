@@ -1,7 +1,7 @@
 #ifndef _QUEUESYSTEM_H_
 #define _QUEUESYSTEM_H_
 
-#include "Event.h"
+//#include "Event.h"
 #include "Queue.h"
 #include "ServiceWindow.h"
 

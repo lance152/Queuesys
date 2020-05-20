@@ -1,4 +1,4 @@
-#include "QueueSystem.hpp"
+#include "QueueSystem.h"
 
 #include <iostream>
 #include <cstdlib>

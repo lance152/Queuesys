@@ -40,7 +40,7 @@ private:
   double avg_stay_time;
   double avg_customers;
 
-  //系统运行一次
+  //系统运行一次,返回顾客逗留了多久
   double run();
 
   //初始化参数

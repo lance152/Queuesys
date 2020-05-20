@@ -1,8 +1,12 @@
 #include "Queue.h"
+#include <iostream>
+#include <cstdlib>
+
+#include "Event.h"
 
 template<typename T>
 Queue<T>::Queue(){
-  front = new T;
+  this->front = new T;
   //如果内存分配失败，则不继续运行
   if(!front){
     exit(-1);

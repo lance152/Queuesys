@@ -16,4 +16,5 @@ int main(){
 
   std::cout<<"The average time of customer stay in bank: "<<system.getAvgStayTime()<<std::endl;
   std::cout<<"The number of customer arrive bank per minute: "<<system.getAvgCustomers()<<std::endl;
+  return 0;
 }

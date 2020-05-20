@@ -1,4 +1,7 @@
 #include "QueueSystem.h"
+#include "Random.h"
+#include "Event.h"
+#include "Queue.h"
 
 QueueSystem::QueueSystem(int _total_service_time, int _window_num):
   total_service_time(_total_service_time),

@@ -1,7 +1,7 @@
 #include "QueueSystem.h"
 #include "Random.h"
 #include "Event.h"
-#include "Queue.h"
+
 
 QueueSystem::QueueSystem(int _total_service_time, int _window_num):
   total_service_time(_total_service_time),
@@ -104,27 +104,27 @@ void QueueSystem::customerArrived(){
 
 //处理顾客离开事件
 void QueueSystem::customerDeparture(){
-  //首先判断离开时间是否大于总服务时间，如果大于则不管
-  //然后要计算顾客总的逗留时间
-  //如果顾客队列中有人，则立即服务该顾客
-  //如果没人则把该窗口设置为idle
-  if(current_event->occur_time>total_service_time){
-    return;
-  }
-  total_customer_stay_time += windows[current_event->event_type].getCustomerDuration();
+//首先判断离开时间是否大于总服务时间，如果大于则不管
+//然后要计算顾客总的逗留时间
+//如果顾客队列中有人，则立即服务该顾客
+//如果没人则把该窗口设置为idle
+if(current_event->occur_time<total_service_time){
 
-  if(customer_list.length()){
-    Customer *customer;
-    customer = customer_list.pop();
-    windows[current_event->event_type].serveCustomer(*customer);
+total_customer_stay_time += windows[current_event->event_type].getCustomerDuration();
 
-    //生成顾客离开事件
-    Event temp_event(current_event->occur_time+customer->duration,current_event->event_type);
-    event_list.Eventpush(temp_event);
+if(customer_list.length()){
+  Customer *customer;
+  customer = customer_list.pop();
+  windows[current_event->event_type].serveCustomer(*customer);
 
-    delete customer;
-  }else{
-    windows[current_event->event_type].setIdle();
-  }
+  //生成顾客离开事件
+  Event temp_event(current_event->occur_time+customer->duration,current_event->event_type);
+  event_list.Eventpush(temp_event);
+
+  delete customer;
+}else{
+  windows[current_event->event_type].setIdle();
+}
+}
 
 }

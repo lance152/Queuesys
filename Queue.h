@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _QUEUE_H_
 #define _QUEUE_H_
 
@@ -14,13 +12,12 @@ public:
   Queue(){
     this->front = new T;
     //如果内存分配失败，则不继续运行
-    if(!front){
+    if(!this->front){
       exit(-1);
     }
 
-    front->next = NULL;
-    rear = front;
-    len = 0;
+    this->front->next = NULL;
+    this->rear = this->front;
   }
 
   ~Queue(){
@@ -28,21 +25,21 @@ public:
     this->clearQueue();
 
     //删除头节点
-    delete front;
+    delete this->front;
 
   }
 
   void clearQueue(){
     T* temp_node;
 
-    while(front->next){
-      temp_node = front->next;
-      front->next = temp_node->next;
+    while(this->front->next){
+      temp_node = this->front->next;
+      this->front->next = temp_node->next;
       delete temp_node;
     }
 
-    front->next = NULL;
-    rear = front;
+    this->front->next = NULL;
+    this->rear = this->front;
   }
 
   T* push(T& node){
@@ -53,21 +50,20 @@ public:
     }
 
     *new_node = node;
-    rear->next = new_node;
-    rear = new_node;
-    len++;
-    return front;
+    this->rear->next = new_node;
+    this->rear = new_node;
+    return this->front;
   }
 
   T* pop(){
-    if(!front->next){
+    if(!this->front->next){
       return NULL;
     }
 
-    T* temp_node = front->next;
-    front->next = temp_node->next;
+    T* temp_node = this->front->next;
+    this->front->next = temp_node->next;
 
-    if(rear = temp_node) rear = front;//如果只有一个节点，则把尾节点指向头节点
+    if(this->rear = temp_node) this->rear = this->front;//如果只有一个节点，则把尾节点指向头节点
     return temp_node;
   }
 
@@ -79,12 +75,12 @@ public:
     *temp = event;
 
     //如果队列中没有event，则直接入队
-    if(!front->next){
+    if(!this->front->next){
       push(*temp);
-      return front;
+      return this->front;
     }
 
-    Event *temp_event_list = front;
+    Event *temp_event_list = this->front;
 
     while(temp_event_list->next && temp_event_list->next->occur_time<event.occur_time){
       temp_event_list = temp_event_list->next;
@@ -92,19 +88,24 @@ public:
 
     temp->next = temp_event_list->next;
     temp_event_list->next = temp;
-    len++;
 
     return this->front;
   }
 
-  int length() const {
+  int length(){
+    T* temp_node;
+    temp_node = this->front->next;
+    int len = 0;
+    while(temp_node){
+      temp_node = temp_node->next;
+      len++;
+    }
     return len;
   }
 
 private:
   T* front;
   T* rear;
-  int len;
 };
 
 #endif

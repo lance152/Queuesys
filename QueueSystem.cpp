@@ -22,7 +22,7 @@ void QueueSystem::simulate(int simulate_time){
   }
 
   avg_stay_time = (double)sum/simulate_time;
-  avg_customers = (double)total_customer_num/total_service_time;
+  avg_customers = (double)total_customer_num/(total_service_time*simulate_time);
 }
 
 void QueueSystem::init(){
@@ -43,7 +43,7 @@ void QueueSystem::end(){
 }
 
 double QueueSystem::run(){
-  this->init();
+  init();
   while(current_event){
     if(current_event->event_type==-1){
       //顾客到达事件
@@ -56,7 +56,7 @@ double QueueSystem::run(){
     //获得新事件
     current_event = event_list.pop();
   }
-  this->end();
+  end();
   return (double) total_customer_stay_time/total_customer_num;
 }
 

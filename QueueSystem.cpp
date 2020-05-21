@@ -43,7 +43,7 @@ void QueueSystem::end(){
 }
 
 double QueueSystem::run(){
-  init();
+  this->init();
   while(current_event){
     if(current_event->event_type==-1){
       //顾客到达事件
@@ -56,7 +56,7 @@ double QueueSystem::run(){
     //获得新事件
     current_event = event_list.pop();
   }
-  end();
+  this->end();
   return (double) total_customer_stay_time/total_customer_num;
 }
 
@@ -72,6 +72,7 @@ int QueueSystem::getIdleServiceWindow(){
 //处理顾客到达事件
 void QueueSystem::customerArrived(){
   //下一个顾客到达时间间隔，假设100分钟内一定有顾客来
+  total_customer_num++;
   int intertime = Random::uniform(100);
   //下一个顾客到达时间
   int time = current_event->occur_time+intertime;
@@ -88,6 +89,7 @@ void QueueSystem::customerArrived(){
   if(!customer){
     exit(-1);
   }
+  customer_list.push(*customer);
   //找到空闲的窗口
   int idleindex = getIdleServiceWindow();
   if(idleindex>=0){
